@@ -1,5 +1,9 @@
 @import '/assets/static/stylesheets/fonts/inconsolata.css';
 
+p {
+    margin: 0 !important;
+}
+
 body:before {
     background-image: none !important;
     background-color: var(--bg-1) !important;
@@ -21,9 +25,14 @@ h1 {
     text-align: left !important;
 }
 
+#main {
+    text-align: var(--alignment);
+    --alignment: var(--site-language-alignment);
+}
+
 .terminal {
     box-sizing: inherit;
-    position: absolute;
+    position: relative;
     height: 100%;
     width: 100%;
     padding: 4rem;
@@ -41,12 +50,12 @@ h1 {
     content: "> ";
 }
 
-.op.\31, .c2 {
-    margin-left: 1em
+.op.pds, .op.sg {
+    margin-left: 1em !important;
 }
 
-.op.\32 {
-    margin-left: 2em
+.op.sg_pds {
+    margin-left: 2em !important;
 }
 
 a {
