@@ -23,8 +23,8 @@
     <meta property="og:image:width" content="1280" />
     <meta property="og:image:height" content="800" />
 
-    <link rel="icon" type="image/x-icon" href="./static/assets/images/favicon.ico">
-    <link rel="apple-touch-icon" sizes="180x180" href="./static/assets/images/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="./assets/static/images/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/static/images/favicon.ico" />
 
     <meta property="twitter:card" content="summary_large_image" />
 
@@ -36,8 +36,7 @@
         content="width=device-width,initial-scale=1,user-scalable=no" />
 
     <link href="./assets/static/stylesheets/base.css" rel="stylesheet">
-    <link href="./assets/static/stylesheets/home.css" rel="stylesheet">
-    <link href="./assets/static/stylesheets/list.css" rel="stylesheet">
+    <link href="./assets/static/stylesheets/forms.css" rel="stylesheet">
     <link href="./assets/static/stylesheets/responsive-base.css" rel="stylesheet">
 </head>
 
@@ -76,33 +75,44 @@
         <div id="main">
             <div class="inner">
                 <header>
-                    <h1>About Me</h1>
+                    <h1>Feedback Form</h1>
                 </header>
                 <section>
-                    <p>
-                        My name is Lyra, and this project also serves as the foundation for my personal web presence at 
-                        <a href="https://lyra-on.top" target="_blank">https://lyra-on.top</a>. Beyond fulfilling the laboratory requirements, 
-                        I aimed to produce a polished, practical, and visually appealing website. Careful attention was given to layout, readability, 
-                        and consistent styling across all pages.
-                    </p>
-                </section>
-                <section>
-                    <h2>ITEC50 Lab #2: HTML Basic Tags with Forms</h2>
-                    <p>
-                        This exercise fulfills the requirements for <b>ITEC50 Laboratory #2</b>. 
-                        The objective was to create a multi-page website using semantic HTML elements, 
-                        navigation links, and interactive forms.
-                    </p>
-                    <p>
-                        The project demonstrates the following skills and accomplishments:
-                    </p>
-                    <ol class="styled">
-                        <li>Structuring pages with semantic HTML5 elements (<code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;footer&gt;</code>)</li>
-                        <li>Creating functional contact and feedback forms</li>
-                        <li>Implementing headings, paragraphs, lists, and text formatting for clear readability</li>
-                        <li>Ensuring logical navigation across multiple pages</li>
-                        <li>Designing a visually consistent and responsive layout</li>
-                    </ol>
+                    <h2>We want your feedback!</h2>
+                    <p>Let us know how I'm doing. Your feedback helps improve my site.</p>
+
+                    <form action="#" method="POST">
+                        <label for="name">Name:</label><br><br>
+                        <div class="form-box">
+                            <input class="input" type="text"
+                                placeholder="Your Name (not the anime)"
+                                class="form" pattern="https:\/\/mangareader\.to\/read\/.+\/.+\/.+">
+                            <btn class="icon1" id="erase-input" style="visibility: hidden;">×</btn>
+                        </div><br><br>
+
+                        <label for="email">Email:</label><br><br>
+                        <div class="form-box">
+                            <input class="input" type="text"
+                                placeholder="you@example.com"
+                                class="form" pattern="[^@\s]+@[^@\s]+\.[^@\s]+">
+                            <btn class="icon1" id="erase-input" style="visibility: hidden;">×</btn>
+                        </div><br><br>
+
+                        <label>Rating:</label><br>
+                        <div class="star-rating">
+                            <input type="radio" id="star5" name="rating" value="5"><label for="star5"></label>
+                            <input type="radio" id="star4" name="rating" value="4"><label for="star4"></label>
+                            <input type="radio" id="star3" name="rating" value="3"><label for="star3"></label>
+                            <input type="radio" id="star2" name="rating" value="2"><label for="star2"></label>
+                            <input type="radio" id="star1" name="rating" value="1"><label for="star1"></label>
+                        </div>
+                        <br><br>
+
+                        <label for="comments">Comments:</label><br>
+                        <textarea id="comments" name="comments" rows="5" placeholder="Your thoughts..." required></textarea><br><br>
+
+                        <button type="submit">Submit Feedback</button>
+                    </form>
                 </section>
             </div>
         </div>

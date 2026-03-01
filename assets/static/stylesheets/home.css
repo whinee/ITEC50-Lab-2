@@ -48,12 +48,6 @@ sup {
     font-size: smaller;
 }
 
-a {
-    color: inherit;
-    text-decoration: underline;
-    transition: color 0.25s ease;
-}
-
 #main>.inner {
     position: relative;
     z-index: 1;
@@ -157,22 +151,6 @@ p .li {
 
 h1 br+br {
     margin-top: 0.75rem;
-}
-
-h1 {
-    color: #FFFFFF;
-    font-family: 'Roboto', sans-serif;
-    font-size: 2.5em;
-    line-height: 1.25;
-    font-weight: 900;
-}
-
-h1 a {
-    text-decoration: underline;
-}
-
-h1 a:hover {
-    text-decoration: none;
 }
 
 .inner > p br+br {

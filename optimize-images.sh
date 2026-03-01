@@ -1,8 +1,17 @@
-# Usage: ./optimize-images-same-folder.sh /path/to/static/images
-
+# Constants
 SRC_DIR="./assets/static/images"
-SIZES=(24 48 96 144 256 320 480 720 1080 1440)  # target widths
-EXCLUDE_FOLDERS=("screenshots")  # folders to skip
+EXCLUDE_FOLDERS=("screenshots")
+ICON_REL_SRC_PATH="lyra logo square.png"
+ICON_REL_OUT_PATH="favicon.ico"
+BANNER_REL_SRC_PATH="lyra logo.png"
+BANNER_REL_OUT_PATH="banner.png"
+WIDTHS=(24 48 96 144 256 320 480 720 1080 1440)
+
+# Derived Variables
+ICON_SRC_PATH="$SRC_DIR/$ICON_REL_SRC_PATH"
+ICON_OUT_PATH="$SRC_DIR/$ICON_REL_OUT_PATH"
+BANNER_SRC_PATH="$SRC_DIR/$BANNER_REL_SRC_PATH"
+BANNER_OUT_PATH="$SRC_DIR/$BANNER_REL_OUT_PATH"
 
 # Function to check if a path should be excluded
 should_exclude() {
@@ -14,6 +23,8 @@ should_exclude() {
     done
     return 1  # no, keep
 }
+magick "$ICON_SRC_PATH" -resize "180x180" -quality 80 "$ICON_OUT_PATH"
+magick "$BANNER_SRC_PATH" -resize "180x180" -quality 80 "$BANNER_OUT_PATH"
 
 # find all images recursively
 find "$SRC_DIR" -type f \( -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" \) | while read IMG; do
@@ -26,11 +37,11 @@ find "$SRC_DIR" -type f \( -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" \
     DIR_NAME="$(dirname "$IMG")"
     BASE_NAME="$(basename "$IMG" | sed 's/\.[^.]*$//')"  # strip extension
 
-    for SIZE in "${SIZES[@]}"; do
+    for SIZE in "${WIDTHS[@]}"; do
         OUT_FILE="$DIR_NAME/${BASE_NAME}-${SIZE}w.webp"
 
         # convert + resize + optimize
-        convert "$IMG" -resize "${SIZE}x" -quality 80 "$OUT_FILE"
+        magick "$IMG" -resize "${SIZE}x" -quality 80 "$OUT_FILE"
         echo "Created $OUT_FILE"
     done
 done

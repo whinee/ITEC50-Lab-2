@@ -1,5 +1,9 @@
 @import '/assets/static/stylesheets/fonts/inconsolata.css';
 
+#wrapper {
+    padding: 0 !important;
+}
+
 p {
     margin: 0 !important;
 }
@@ -11,6 +15,7 @@ body:before {
 }
 
 body {
+    display: block !important;
     box-sizing: border-box;
     height: 100%;
     font-family: "Inconsolata" !important;
@@ -23,11 +28,13 @@ body {
 
 h1 {
     text-align: left !important;
+    font-family: "Inconsolata" !important;
+    color: var(--fg-3) !important;
 }
 
 #main {
-    text-align: var(--alignment);
     --alignment: var(--site-language-alignment);
+    text-align: var(--alignment);
 }
 
 .terminal {
