@@ -85,17 +85,17 @@
                         <label for="name">Name:</label><br><br>
                         <div class="form-box">
                             <input class="input" type="text"
-                                placeholder="Your Name (not the anime)"
-                                class="form" pattern="https:\/\/mangareader\.to\/read\/.+\/.+\/.+">
-                            <btn class="icon1" id="erase-input" style="visibility: hidden;">×</btn>
+                                placeholder="Your Name (not the anime!)"
+                                class="form" required>
+                            <btn class="icon1" class="erase-input" style="visibility: hidden;">×</btn>
                         </div><br><br>
 
                         <label for="email">Email:</label><br><br>
                         <div class="form-box">
                             <input class="input" type="text"
                                 placeholder="you@example.com"
-                                class="form" pattern="[^@\s]+@[^@\s]+\.[^@\s]+">
-                            <btn class="icon1" id="erase-input" style="visibility: hidden;">×</btn>
+                                class="form" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" required>
+                            <btn class="icon1" class="erase-input" style="visibility: hidden;">×</btn>
                         </div><br><br>
 
                         <label>Rating:</label><br>
@@ -108,8 +108,9 @@
                         </div>
                         <br><br>
 
-                        <label for="comments">Comments:</label><br>
-                        <textarea id="comments" name="comments" rows="5" placeholder="Your thoughts..." required></textarea><br><br>
+                        <label for="comments">Comments:</label><br><br>
+                        <textarea class="input" id="comments" name="comments" rows="5" placeholder="Your thoughts..." required></textarea>
+                        <btn class="icon1" class="erase-input" style="visibility: hidden;">×</btn><br><br>
 
                         <button type="submit">Submit Feedback</button>
                     </form>

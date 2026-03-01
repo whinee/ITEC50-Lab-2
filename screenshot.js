@@ -5,7 +5,15 @@ import { spawn } from "child_process";
 import lighthouse from "lighthouse";
 import * as chromeLauncher from "chrome-launcher";
 
-const htmlFiles = ["blog/00011.html", "blog/index.html", "404.html", "about.html", "index.html"];
+const htmlFiles = [
+    "blog/00011.html",
+    "blog/index.html",
+    "404.html",
+    "about.html",
+    "contact.html",
+    "feedback.html",
+    "index.html",
+];
 
 const PORT = 4173;
 const OUTPUT_ROOT = "assets/static/images/screenshots";
@@ -37,7 +45,7 @@ try {
     const server = spawn("python3", ["-m", "http.server", PORT], { stdio: "ignore" });
     childProcesses.push(server);
 
-    await new Promise(r => setTimeout(r, 1500));
+    await new Promise(r => setTimeout(r, 15000));
 
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
@@ -79,12 +87,12 @@ try {
             seo: Math.round(lhr.categories.seo.score * 100),
 
             metrics: {
-            FCP: lhr.audits["first-contentful-paint"].displayValue,
-            LCP: lhr.audits["largest-contentful-paint"].displayValue,
-            SpeedIndex: lhr.audits["speed-index"].displayValue,
-            TTI: lhr.audits["interactive"].displayValue,
-            TBT: lhr.audits["total-blocking-time"].displayValue,
-            CLS: lhr.audits["cumulative-layout-shift"].displayValue,
+                FCP: lhr.audits["first-contentful-paint"].displayValue,
+                LCP: lhr.audits["largest-contentful-paint"].displayValue,
+                SpeedIndex: lhr.audits["speed-index"].displayValue,
+                TTI: lhr.audits["interactive"].displayValue,
+                TBT: lhr.audits["total-blocking-time"].displayValue,
+                CLS: lhr.audits["cumulative-layout-shift"].displayValue,
             }
         };
 

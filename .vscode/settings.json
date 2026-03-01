@@ -2,27 +2,18 @@
     "latex-workshop.latex.tools": [
         {
             "name": "xelatex",
-            "command": "xelatex",
+            "command": "just",
             "args": [
-                "-synctex=1",
-                "-interaction=nonstopmode",
-                "-file-line-error",
-                "-shell-escape",
+                "build_tex",
                 "%DOC%"
             ]
-        },
-        {
-            "name": "screenshots",
-            "command": "node",
-            "args": [
-                "screenshot.js"
-            ],
         }
     ],
     "latex-workshop.latex.recipes": [
         {
-            "name": "xelatex",
+            "name": "xelatex*2",
             "tools": [
+                "xelatex",
                 "xelatex"
             ]
         }
