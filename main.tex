@@ -16,6 +16,8 @@
 \usepackage{etoolbox}
 \usepackage{framed}
 \usepackage{float}
+\usepackage{pdfpages}
+\usepackage{metalogo}
 
 \hypersetup{
   pdftitle={ITEC50 Web Systems and Technologies Laboratory \#2},
@@ -169,6 +171,8 @@
 
 \begin{document}
 
+\includepdf[pages={1}]{ITEC50-Lab-2.pdf}
+
 {
   \centering
   {\huge ITEC50 Web Systems and Technologies\par}
@@ -221,6 +225,74 @@ The final chapters include proper attributions for external resources used in th
 
 \input{pages.tex}
 
+\chapter{Build Automation and Workflow}
+
+The website project was designed around a reproducible and deterministic build pipeline using a \texttt{justfile}, executed via the \texttt{just} command runner. Rather than manually executing multiple independent commands, a single top-level build target orchestrates content generation, visual validation, performance analysis, and documentation compilation.
+
+This approach ensures consistency, reduces human error, and guarantees that the generated documentation always reflects the current state of the website.
+
+\section{Blog Index Generation}
+
+The \texttt{gen\_blog} target executes a Node.js script (\texttt{blog.js}) that scans the \texttt{./blog} directory, extracts metadata from individual blog posts, and dynamically regenerates \texttt{./blog/index.html}. 
+
+By programmatically constructing the blog index, the workflow eliminates the need for manual updates when new posts are added. This transforms blog indexing from a maintenance task into an automated build step, ensuring structural consistency and preventing synchronization errors.
+
+\section{Automated Screenshot Capture and Lighthouse Report Generation}
+
+Because Lighthouse and Puppeteer require an HTTP context for accurate rendering and performance evaluation, the script programmatically launches a temporary local development server using Python’s built-in HTTP module. This simulates a deployment environment while remaining fully local and reproducible.
+
+Using Puppeteer, a headless Chromium instance renders each HTML page across multiple predefined viewport dimensions. This enables systematic verification of responsive behavior across desktop and mobile screen sizes.
+
+The script dynamically generates \texttt{pages.tex}, which includes:
+
+\begin{itemize}
+    \item A dedicated section for each HTML file
+    \item Embedded screenshots at all tested resolutions
+    \item The raw HTML source code via Minted for syntax-highlighted inclusion
+\end{itemize}
+
+This automated generation ensures that visual documentation and source code listings remain synchronized with the live website implementation.
+
+For each page, Lighthouse is executed in headless mode to generate performance, accessibility, best practices, and SEO scores. Key metrics such as FCP, LCP, TTI, TBT, CLS, and Speed Index are extracted from the JSON output and formatted into structured \LaTeX{} tables.
+
+These scores and metrics are recorded in \texttt{lighthouse\_reports.tex}, which is incorporated into the final documentation. A detailed discussion of these results is provided in the following chapter.
+
+\section{{\LatinModernRoman \LaTeX} Compilation}
+
+The \texttt{build\_tex} target compiles the {\LatinModernRoman \LaTeX} documentation using \texttt{latexmk} with {\LatinModernRoman \XeLaTeX}. The use of XeLaTeX enables full Unicode support and modern font handling, while \texttt{latexmk} automatically manages multiple compilation passes, cross-references, and bibliography processing.
+
+By integrating compilation into the automated workflow, the final PDF becomes a reproducible build artifact rather than a manually assembled document.
+
+\section{Project Build Pipeline Aggregation}
+
+The top-level \texttt{build} target sequentially invokes:
+
+\begin{itemize}
+    \item Blog Index Generation
+    \item Automated Screenshot Capture and Lighthouse Report Generation
+    \item {\LatinModernRoman \LaTeX} Compilation
+\end{itemize}
+
+This orchestration guarantees that content generation, validation, and documentation are performed in a consistent and deterministic order. As a result, the generated PDF always reflects the most recent version of the website and its associated performance analysis.
+
+\chapter{Build Automation and Workflow Scripts}
+
+\section{\texttt{justfile}}
+
+\inputmintedstyled{make}{justfile}
+
+\section{\texttt{optimize\_images.sh}}
+
+\inputmintedstyled{sh}{optimize_images.sh}
+
+\section{\texttt{blog.js}}
+
+\inputmintedstyled{js}{blog.js}
+
+\section{\texttt{screenshot.js}}
+
+\inputmintedstyled{js}{screenshot.js}
+
 \chapter{Lighthouse Reports}
 
 Lighthouse is a tool developed by Google that audits web pages across several important dimensions, including performance, accessibility, adherence to best practices, and search engine optimization (SEO). It provides quantitative metrics such as First Contentful Paint (FCP), Largest Contentful Paint (LCP), Time to Interactive (TTI), Total Blocking Time (TBT), and Cumulative Layout Shift (CLS), which together give a clear picture of how quickly and reliably a webpage loads, becomes usable, and remains visually stable. Accessibility scores highlight whether users with disabilities can effectively navigate and interact with the site, while best practices and SEO checks ensure modern web standards and discoverability are maintained.
@@ -248,10 +320,6 @@ Lighthouse is a tool developed by Google that audits web pages across several im
 Notice that there are no \texttt{!important} imperative in \texttt{assets/static/stylesheets/base.css}? That is intentional. It serves as the basis of styling for all the homepages, and thus, if a specific page has a different requirement from that of the base stylesheet, then it can be easily overriden by a \texttt{!important} imperative.
 
 \inputmintedstyledtwocolumns{css}{assets/static/stylesheets/base.css}
-\newpage
-
-\section{\texttt{assets/static/stylesheets/blog.css}}
-\inputmintedstyledtwocolumns{css}{assets/static/stylesheets/blog.css}
 \newpage
 
 \section{\texttt{assets/static/stylesheets/code.css}}

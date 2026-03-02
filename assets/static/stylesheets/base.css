@@ -463,7 +463,7 @@ ol.styled li, ul.styled li {
 #wrapper {
     -webkit-overflow-scrolling: touch;
     max-width: 736px;
-    padding-top: 30px;
+    padding-top: 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -472,7 +472,7 @@ ol.styled li, ul.styled li {
     position: relative;
     z-index: 2;
     overflow: hidden;
-    margin: 0 2em;
+    margin: auto;
 }
 
 #main {
